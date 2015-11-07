@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>542</width>
+    <height>204</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTabWidget" name="append_tab">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>521</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Tab 1</string>
+    </attribute>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>20</y>
+       <width>391</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="nimLabel">
+        <property name="text">
+         <string>nim</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="student_number_line_edit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="namaLabel">
+        <property name="text">
+         <string>nama</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="name_line_edit"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="alamatLabel">
+        <property name="text">
+         <string>alamat</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="address__line_edit"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="submiting_button">
+        <property name="text">
+         <string>submit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="clearing_button">
+        <property name="text">
+         <string>clear</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Tab 2</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>clearing_button</sender>
+   <signal>clicked()</signal>
+   <receiver>address__line_edit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>173</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearing_button</sender>
+   <signal>clicked()</signal>
+   <receiver>name_line_edit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>186</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearing_button</sender>
+   <signal>clicked()</signal>
+   <receiver>student_number_line_edit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
