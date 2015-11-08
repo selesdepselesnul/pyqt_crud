@@ -47,7 +47,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="student_number_line_edit"/>
+       <widget class="QLineEdit" name="id_line_edit"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="namaLabel">
@@ -130,7 +130,7 @@
   <connection>
    <sender>clearing_button</sender>
    <signal>clicked()</signal>
-   <receiver>student_number_line_edit</receiver>
+   <receiver>id_line_edit</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">

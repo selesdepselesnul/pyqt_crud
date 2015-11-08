@@ -1,5 +1,6 @@
-from MainWindowController import MainWindowController
 from PyQt5.QtWidgets import QApplication
+
+from controller.MainWindowController import MainWindowController
 
 if __name__ == '__main__':
     import sys
