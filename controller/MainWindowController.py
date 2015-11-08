@@ -4,6 +4,7 @@ from model.Student import Student
 from pathlib import Path
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
+import re
 import pickle
 
 
@@ -22,10 +23,6 @@ class MainWindowController(QWidget):
             self.on_filtering_students
         )
 
-        self.ui.students_table_widget.currentItemChanged.connect(
-            lambda _, __: self.ui.saved_button.setEnabled(True)
-        )
-
         self.ui.students_table_widget.itemClicked.connect(
             self.on_student_data_clicked
         )
@@ -34,7 +31,19 @@ class MainWindowController(QWidget):
             self.on_student_end_editing
         )
 
+        self.ui.filtering_by_id_line_edit.textChanged.connect(
+            self.on_typing_filtering_id
+        )
+
         self.update_students_table_widget()
+
+    def on_typing_filtering_id(self):
+        filtered_id = str(self.ui.filtering_by_id_line_edit.text())
+        filtered_students = list(filter(
+            lambda x: re.match(filtered_id + "\d*" ,
+                               x.student_id), self.__students))
+        self.__add_to_students_table_widget(filtered_students)
+
 
     def change_data_by_id(self, item, new_value, action):
         student_id = self.ui.students_table_widget.item(
@@ -103,7 +112,7 @@ class MainWindowController(QWidget):
             item.setFlags(item.flags() ^ Qt.ItemIsEditable)
             return item
 
-        self.ui.students_table_widget.setRowCount(len(self.__students))
+        self.ui.students_table_widget.setRowCount(len(students))
         for i in range(len(students)):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
                                                           uneditable_item_widget(
