@@ -14,6 +14,7 @@ class MainWindowController(QWidget):
         self.ui.submiting_button.clicked.connect(
             self.on_submiting_data)
 
+
         self.update_students_table_widget()
 
     def update_students_table_widget(self):
@@ -56,4 +57,5 @@ class MainWindowController(QWidget):
                                                  'rb')))
             student_list.append(student)
             pickle.dump(student_list, open(self.__STUDENTS_DATA_FILE, 'wb'))
+            self.update_students_table_widget()
             print("Exist")

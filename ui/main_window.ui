@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>272</height>
+    <width>565</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -157,6 +157,19 @@
        <string>Display Deleted Data</string>
       </property>
      </item>
+    </widget>
+    <widget class="QPushButton" name="saveButton">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>190</y>
+       <width>92</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Simpan</string>
+     </property>
     </widget>
    </widget>
   </widget>
