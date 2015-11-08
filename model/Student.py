@@ -1,9 +1,12 @@
 class Student(object):
 
+    is_active = True
+
     def __init__(self, student_id, name, address):
         self.__student_id = str(student_id)
         self.__name = str(name)
         self.__address = str(address)
+
 
     @property
     def student_id(self):
@@ -16,3 +19,5 @@ class Student(object):
     @property
     def address(self):
         return self.__address
+
+

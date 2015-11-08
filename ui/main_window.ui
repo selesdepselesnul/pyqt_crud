@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>542</width>
-    <height>204</height>
+    <width>567</width>
+    <height>272</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,12 +18,12 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>521</width>
-     <height>201</height>
+     <width>561</width>
+     <height>271</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -32,15 +32,15 @@
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>20</y>
+       <x>90</x>
+       <y>60</y>
        <width>391</width>
        <height>131</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
-       <widget class="QLabel" name="nimLabel">
+       <widget class="QLabel" name="idLabel">
         <property name="text">
          <string>nim</string>
         </property>
@@ -50,7 +50,7 @@
        <widget class="QLineEdit" name="id_line_edit"/>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="namaLabel">
+       <widget class="QLabel" name="nameLabel">
         <property name="text">
          <string>nama</string>
         </property>
@@ -60,7 +60,7 @@
        <widget class="QLineEdit" name="name_line_edit"/>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="alamatLabel">
+       <widget class="QLabel" name="addressLabel">
         <property name="text">
          <string>alamat</string>
         </property>
@@ -90,6 +90,74 @@
     <attribute name="title">
      <string>Tab 2</string>
     </attribute>
+    <widget class="QTableWidget" name="students_table_widget">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>491</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>id</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>nama</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>alamat</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>status aktif</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLineEdit" name="find_by_id_line_edit">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>190</y>
+       <width>131</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>id</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="students_filtering_combo_box">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>190</y>
+       <width>161</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Display All</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Display Active Data</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Display Deleted Data</string>
+      </property>
+     </item>
+    </widget>
    </widget>
   </widget>
  </widget>
