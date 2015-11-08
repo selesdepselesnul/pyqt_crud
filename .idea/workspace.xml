@@ -70,8 +70,8 @@
       <file leaf-file-name="MainWindowController.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/MainWindowController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6161369">
-              <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.82885087">
+              <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="50" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
               </folding>
@@ -513,8 +513,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/MainWindowController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6161369">
-          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.82885087">
+          <caret line="43" column="50" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="50" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>

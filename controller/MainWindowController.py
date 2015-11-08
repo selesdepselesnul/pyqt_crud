@@ -3,6 +3,7 @@ from PyQt5 import uic
 from model.Student import Student
 from pathlib import Path
 from PyQt5.QtGui import QColor
+from PyQt5.QtCore import Qt
 import pickle
 
 
@@ -20,9 +21,31 @@ class MainWindowController(QWidget):
         )
 
         self.ui.students_table_widget.currentItemChanged.connect(
-            lambda current, y: print('Cell Changed'))
+            lambda _, __: self.ui.saved_button.setEnabled(True)
+        )
+
+        self.ui.students_table_widget.itemDoubleClicked.connect(
+            self.on_student_data_clicked
+        )
 
         self.update_students_table_widget()
+
+    def on_student_data_clicked(self, item):
+        if item.text() == 'True' or item.text() == 'False':
+            if bool(item.text()):
+               print(item.text)
+               print('True')
+               item.setText('False')
+               item.setBackground(QColor('red'))
+            else:
+                print(item.text)
+                print('False')
+                item.setText('True')
+                item.setBackground(QColor('green'))
+
+
+
+
 
     def on_filtering_students(self, choosen):
         def filtering_student(predicate):
@@ -50,6 +73,7 @@ class MainWindowController(QWidget):
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
                                                           students[i].address))
             item = QTableWidgetItem(str(students[i].is_active))
+            item.setFlags(item.flags() ^ Qt.ItemIsEditable)
             if bool(students[i].is_active):
                 item.setBackground(QColor('green'))
             else:

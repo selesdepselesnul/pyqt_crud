@@ -158,7 +158,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QPushButton" name="savedButton">
+    <widget class="QPushButton" name="saved_button">
      <property name="enabled">
       <bool>false</bool>
      </property>
