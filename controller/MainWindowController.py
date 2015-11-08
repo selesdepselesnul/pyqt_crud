@@ -4,16 +4,21 @@ from model.Student import Student
 from pathlib import Path
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QFileDialog
 import re
 import pickle
 
 
 class MainWindowController(QWidget):
+    FILE_FILTERING_FORMAT = "lll File (*lll)"
+    DEFAULT_FILE = 'Students'
+    FILE_EXT = '.lll'
 
     def __init__(self):
         super().__init__()
 
-        self.__STUDENTS_DATA_FILE = 'Students.dat'
+        self.__STUDENTS_DATA_FILE = MainWindowController.DEFAULT_FILE \
+                                    + MainWindowController.FILE_EXT
         self.__students = []
         self.ui = uic.loadUi('ui/main_window.ui', self)
         self.ui.submiting_button.clicked.connect(
@@ -35,7 +40,29 @@ class MainWindowController(QWidget):
             self.on_typing_filtering_id
         )
 
+        self.ui.loading_students_button.clicked.connect(
+            self.on_loading_student_button_clicked
+        )
+
+        self.ui.packing_students_button.clicked.connect(
+            self.on_packing_student_button_clicked
+        )
+
         self.update_students_table_widget()
+
+    def on_packing_student_button_clicked(self):
+        selected_file = QFileDialog.getSaveFileName(
+            self.ui, "Save lll File", MainWindowController.DEFAULT_FILE + "-bak"
+               + MainWindowController.FILE_EXT, MainWindowController
+                .FILE_FILTERING_FORMAT)[0]
+        pickle.dump(self.__students, open(selected_file, 'wb'))
+
+    def on_loading_student_button_clicked(self):
+        selected_file = QFileDialog.getOpenFileName(
+            self.ui, "Load lll file", 'Sesuatu' + MainWindowController.FILE_EXT,
+                MainWindowController.FILE_FILTERING_FORMAT)[0]
+        students = list(pickle.load(open(selected_file, 'rb')))
+        self.__add_to_students_table_widget(students)
 
     def on_typing_filtering_id(self):
         filtered_id = str(self.ui.filtering_by_id_line_edit.text())
@@ -44,7 +71,6 @@ class MainWindowController(QWidget):
                                x.student_id), self.__students))
         self.__add_to_students_table_widget(filtered_students)
 
-
     def change_data_by_id(self, item, new_value, action):
         student_id = self.ui.students_table_widget.item(
                     item.row(), 0).text()
@@ -52,8 +78,7 @@ class MainWindowController(QWidget):
             if str(self.__students[i].student_id) == student_id:
                 action(i, new_value)
 
-
-    def on_student_end_editing(self, current, prev):
+    def on_student_end_editing(self, _, prev):
         def change_value(action):
             self.change_data_by_id(prev, prev.text(), action)
         if prev is not None:
@@ -67,8 +92,6 @@ class MainWindowController(QWidget):
                 change_value(name_at)
 
             pickle.dump(self.__students, open(self.__STUDENTS_DATA_FILE, 'wb'))
-
-
 
     def on_student_data_clicked(self, item):
         print('Double click')
