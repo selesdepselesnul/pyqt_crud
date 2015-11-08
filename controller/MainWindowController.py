@@ -39,7 +39,8 @@ class MainWindowController(QWidget):
         self.ui.students_table_widget.setRowCount(len(self.__students))
         for i in range(len(students)):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
-                                                          students[i].student_id))
+                                                          students[i].student_id
+            ))
             self.ui.students_table_widget.setItem(i, 1, QTableWidgetItem(
                                                           students[i].name))
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
@@ -50,8 +51,7 @@ class MainWindowController(QWidget):
 
     def update_students_table_widget(self):
 
-        students_path = Path(self.__STUDENTS_DATA_FILE)
-        if students_path.exists():
+        if Path(self.__STUDENTS_DATA_FILE).exists():
             self.__students = list(
                 pickle.load(open(self.__STUDENTS_DATA_FILE, 'rb')))
             self.__add_to_students_table_widget(self.__students)
