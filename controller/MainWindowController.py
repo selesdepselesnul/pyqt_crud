@@ -17,6 +17,7 @@ class MainWindowController(QWidget):
         self.ui = uic.loadUi('ui/main_window.ui', self)
         self.ui.submiting_button.clicked.connect(
             self.on_submiting_data)
+        self.students_updated = []
         self.ui.students_filtering_combo_box.activated[str].connect(
             self.on_filtering_students
         )
@@ -26,24 +27,37 @@ class MainWindowController(QWidget):
         )
 
         self.ui.students_table_widget.itemDoubleClicked.connect(
-            self.on_student_data_clicked
+            self.on_student_data_double_clicked
         )
 
         self.ui.saved_button.clicked.connect(self.on_saved_button_clicked)
         self.update_students_table_widget()
 
-    def on_student_data_clicked(self, item):
+    def on_student_data_double_clicked(self, item):
+        print('Double click')
+
         if item.text() == Student.ACTIVE or item.text() == Student.DEACTIVE:
+
+            def change_status_by_id(new_status):
+                student_id = self.ui.students_table_widget.item(
+                    item.row(), 0).text()
+                for i in range(len(self.__students)):
+                    # print(self.__students[i].student_id)
+                    if str(self.__students[i].student_id) == student_id:
+                        print('cucok')
+                        self.__students[i].status = Student.DEACTIVE
+                        print(self.__students[i].student_id)
+
             if item.text() == Student.ACTIVE:
-                print(item.text)
-                print('True')
+                change_status_by_id(Student.DEACTIVE)
                 item.setText(Student.DEACTIVE)
                 item.setBackground(QColor('red'))
             else:
-                print(item.text)
-                print('False')
+                change_status_by_id(Student.ACTIVE)
                 item.setText(Student.ACTIVE)
                 item.setBackground(QColor('green'))
+
+            pickle.dump(self.__students, open(self.__STUDENTS_DATA_FILE, 'wb'))
 
     def on_saved_button_clicked(self):
         print('You click me !')
@@ -76,22 +90,27 @@ class MainWindowController(QWidget):
             self.update_students_table_widget()
 
     def __add_to_students_table_widget(self, students):
+        def uneditable_item_widget(item_widget):
+            item = QTableWidgetItem(item_widget)
+            item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+            return item
+
         self.ui.students_table_widget.setRowCount(len(self.__students))
         for i in range(len(students)):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
-                                                          students[i].student_id
-            ))
+                                                          uneditable_item_widget(
+                                                              students[i].student_id
+                                                          )))
             self.ui.students_table_widget.setItem(i, 1, QTableWidgetItem(
                                                           students[i].name))
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
                                                           students[i].address))
-            item = QTableWidgetItem(students[i].status)
-            item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+            status_item = uneditable_item_widget(students[i].status)
             if students[i].status == Student.ACTIVE:
-                item.setBackground(QColor('green'))
+                status_item.setBackground(QColor('green'))
             else:
-                item.setBackground(QColor('red'))
-            self.ui.students_table_widget.setItem(i, 3, item)
+                status_item.setBackground(QColor('red'))
+            self.ui.students_table_widget.setItem(i, 3, status_item)
 
     def update_students_table_widget(self):
         if Path(self.__STUDENTS_DATA_FILE).exists():
