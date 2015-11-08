@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5 import uic
 from model.Student import Student
 from pathlib import Path
+from PyQt5.QtGui import QColor
 import pickle
 
 
@@ -17,6 +18,9 @@ class MainWindowController(QWidget):
         self.ui.students_filtering_combo_box.activated[str].connect(
             self.on_filtering_students
         )
+
+        self.ui.students_table_widget.currentItemChanged.connect(
+            lambda current, y: print('Cell Changed'))
 
         self.update_students_table_widget()
 
@@ -45,9 +49,12 @@ class MainWindowController(QWidget):
                                                           students[i].name))
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
                                                           students[i].address))
-            self.ui.students_table_widget.setItem(i, 3, QTableWidgetItem(
-                                                          str(students[i].
-                                                              is_active)))
+            item = QTableWidgetItem(str(students[i].is_active))
+            if bool(students[i].is_active):
+                item.setBackground(QColor('green'))
+            else:
+                item.setBackground(QColor('red'))
+            self.ui.students_table_widget.setItem(i, 3, item)
 
     def update_students_table_widget(self):
 
