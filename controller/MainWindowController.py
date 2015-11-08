@@ -26,53 +26,61 @@ class MainWindowController(QWidget):
             lambda _, __: self.ui.saved_button.setEnabled(True)
         )
 
-        self.ui.students_table_widget.itemDoubleClicked.connect(
-            self.on_student_data_double_clicked
+        self.ui.students_table_widget.itemClicked.connect(
+            self.on_student_data_clicked
         )
 
-        self.ui.saved_button.clicked.connect(self.on_saved_button_clicked)
+        self.ui.students_table_widget.currentItemChanged.connect(
+            self.on_student_end_editing
+        )
+
         self.update_students_table_widget()
 
-    def on_student_data_double_clicked(self, item):
-        print('Double click')
-
-        if item.text() == Student.ACTIVE or item.text() == Student.DEACTIVE:
-
-            def change_status_by_id(new_status):
-                student_id = self.ui.students_table_widget.item(
+    def change_data_by_id(self, item, new_value, action):
+        student_id = self.ui.students_table_widget.item(
                     item.row(), 0).text()
-                for i in range(len(self.__students)):
-                    # print(self.__students[i].student_id)
-                    if str(self.__students[i].student_id) == student_id:
-                        print('cucok')
-                        self.__students[i].status = Student.DEACTIVE
-                        print(self.__students[i].student_id)
+        for i in range(len(self.__students)):
+            if str(self.__students[i].student_id) == student_id:
+                action(i, new_value)
+
+
+    def on_student_end_editing(self, current, prev):
+        def change_value(action):
+            self.change_data_by_id(prev, prev.text(), action)
+        if prev is not None:
+            if prev.column() == 2:
+                def address_at(i, new_value):
+                    self.__students[i].address = new_value
+                change_value(address_at)
+            elif prev.column() == 1:
+                def name_at(i, new_value):
+                    self.__students[i].name = new_value
+                change_value(name_at)
+
+            pickle.dump(self.__students, open(self.__STUDENTS_DATA_FILE, 'wb'))
+
+
+
+    def on_student_data_clicked(self, item):
+        print('Double click')
+        def change_status_at(i, new_value):
+             self.__students[i].status = new_value
+
+        def change_status(new_value):
+            self.change_data_by_id(item, new_value, change_status_at)
+
+        if item.column() == 3:
 
             if item.text() == Student.ACTIVE:
-                change_status_by_id(Student.DEACTIVE)
+                change_status(Student.DEACTIVE)
                 item.setText(Student.DEACTIVE)
                 item.setBackground(QColor('red'))
             else:
-                change_status_by_id(Student.ACTIVE)
+                change_status(Student.ACTIVE)
                 item.setText(Student.ACTIVE)
                 item.setBackground(QColor('green'))
 
             pickle.dump(self.__students, open(self.__STUDENTS_DATA_FILE, 'wb'))
-
-    def on_saved_button_clicked(self):
-        print('You click me !')
-        new_students_data = []
-        for i in range(len(self.__students)):
-            student = Student(self.ui.students_table_widget.item(i, 0).text(),
-                    self.ui.students_table_widget.item(i, 1).text(),
-                    self.ui.students_table_widget.item(i, 2).text(),
-                    self.ui.students_table_widget.item(i, 3)
-                                     .text())
-
-            new_students_data.append(student)
-
-        pickle.dump(new_students_data, open(self.__STUDENTS_DATA_FILE, 'wb'))
-        self.update_students_table_widget()
 
     def on_filtering_students(self, choosen):
         def filtering_student(predicate):

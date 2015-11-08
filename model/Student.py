@@ -14,8 +14,8 @@ class Student(object):
         return self.__status
 
     @status.setter
-    def status(self, new_status):
-        self.__status = new_status
+    def status(self, status):
+        self.__status = status
 
     @property
     def student_id(self):
@@ -25,8 +25,16 @@ class Student(object):
     def name(self):
         return self.__name
 
+    @name.setter
+    def name(self, name):
+        self.__name = name
+
     @property
     def address(self):
         return self.__address
+
+    @address.setter
+    def address(self, address):
+        self.__address = address
 
 

@@ -161,31 +161,6 @@
       </property>
      </item>
     </widget>
-    <widget class="QPushButton" name="saved_button">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>190</y>
-       <width>92</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Simpan</string>
-     </property>
-     <property name="checkable">
-      <bool>false</bool>
-     </property>
-     <property name="default">
-      <bool>false</bool>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
    </widget>
   </widget>
  </widget>
