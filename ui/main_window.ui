@@ -91,6 +91,9 @@
      <string>Tab 2</string>
     </attribute>
     <widget class="QTableWidget" name="students_table_widget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -116,7 +119,7 @@
      </column>
      <column>
       <property name="text">
-       <string>status aktif</string>
+       <string>status</string>
       </property>
      </column>
     </widget>

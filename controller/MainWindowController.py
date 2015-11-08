@@ -8,6 +8,7 @@ import pickle
 
 
 class MainWindowController(QWidget):
+
     def __init__(self):
         super().__init__()
 
@@ -28,24 +29,36 @@ class MainWindowController(QWidget):
             self.on_student_data_clicked
         )
 
+        self.ui.saved_button.clicked.connect(self.on_saved_button_clicked)
         self.update_students_table_widget()
 
     def on_student_data_clicked(self, item):
-        if item.text() == 'True' or item.text() == 'False':
-            if bool(item.text()):
-               print(item.text)
-               print('True')
-               item.setText('False')
-               item.setBackground(QColor('red'))
+        if item.text() == Student.ACTIVE or item.text() == Student.DEACTIVE:
+            if item.text() == Student.ACTIVE:
+                print(item.text)
+                print('True')
+                item.setText(Student.DEACTIVE)
+                item.setBackground(QColor('red'))
             else:
                 print(item.text)
                 print('False')
-                item.setText('True')
+                item.setText(Student.ACTIVE)
                 item.setBackground(QColor('green'))
 
+    def on_saved_button_clicked(self):
+        print('You click me !')
+        new_students_data = []
+        for i in range(len(self.__students)):
+            student = Student(self.ui.students_table_widget.item(i, 0).text(),
+                    self.ui.students_table_widget.item(i, 1).text(),
+                    self.ui.students_table_widget.item(i, 2).text(),
+                    self.ui.students_table_widget.item(i, 3)
+                                     .text())
 
+            new_students_data.append(student)
 
-
+        pickle.dump(new_students_data, open(self.__STUDENTS_DATA_FILE, 'wb'))
+        self.update_students_table_widget()
 
     def on_filtering_students(self, choosen):
         def filtering_student(predicate):
@@ -55,9 +68,9 @@ class MainWindowController(QWidget):
             self.__add_to_students_table_widget(filtered_student)
 
         if str(choosen) == 'Display Active Data':
-            filtering_student(lambda x: bool(x.is_active) == True)
+            filtering_student(lambda x: x.status == Student.ACTIVE)
         elif str(choosen) == 'Display Deleted Data':
-            filtering_student(lambda x: bool(x.is_active) == False)
+            filtering_student(lambda x: x.status == Student.DEACTIVE)
             print('You choose display deleted data')
         else:
             self.update_students_table_widget()
@@ -72,16 +85,15 @@ class MainWindowController(QWidget):
                                                           students[i].name))
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
                                                           students[i].address))
-            item = QTableWidgetItem(str(students[i].is_active))
+            item = QTableWidgetItem(students[i].status)
             item.setFlags(item.flags() ^ Qt.ItemIsEditable)
-            if bool(students[i].is_active):
+            if students[i].status == Student.ACTIVE:
                 item.setBackground(QColor('green'))
             else:
                 item.setBackground(QColor('red'))
             self.ui.students_table_widget.setItem(i, 3, item)
 
     def update_students_table_widget(self):
-
         if Path(self.__STUDENTS_DATA_FILE).exists():
             self.__students = list(
                 pickle.load(open(self.__STUDENTS_DATA_FILE, 'rb')))
