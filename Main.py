@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from PyQt5.QtWidgets import QApplication
 
 from controller.MainWindowController import MainWindowController
