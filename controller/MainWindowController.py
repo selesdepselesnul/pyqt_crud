@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QFileDialog
 import re
 import pickle
 
-
 class MainWindowController(QWidget):
     FILE_FILTERING_FORMAT = "lll File (*lll)"
     DEFAULT_FILE = 'Students'
@@ -21,6 +20,9 @@ class MainWindowController(QWidget):
                                     + MainWindowController.FILE_EXT
         self.__students = []
         self.ui = uic.loadUi('ui/main_window.ui', self)
+        self.ui.student_tab.setTabText(0, 'Input Mahasiswa')
+        self.ui.student_tab.setTabText(1, 'Manage Mahasiswa')
+
         self.ui.submiting_button.clicked.connect(
             self.on_submiting_data)
         self.students_updated = []
