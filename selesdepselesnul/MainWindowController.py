@@ -70,8 +70,9 @@ class MainWindowController(QWidget):
                                       .__FILE_EXT, MainWindowController
                                       .__FILE_FILTERING_FORMAT)
         if tuple_of_selected_file != ('', ''):
-            students = list(pickle.load(open(tuple_of_selected_file[0], 'rb')))
-            self.__add_to_students_table_widget(students)
+            self.__students = list(pickle.load(open(tuple_of_selected_file[0],
+                                                    'rb')))
+            self.__add_to_students_table_widget(self.__students)
 
     def on_typing_filtering_id(self):
         filtered_id = str(self.ui.filtering_by_id_line_edit.text())
@@ -135,7 +136,7 @@ class MainWindowController(QWidget):
         elif selected_mode == 'Display Deleted Data':
             filter_student(lambda x: x.status == Student.DEACTIVE)
         else:
-            self.__update_students_table_widget()
+            self.__add_to_students_table_widget(self.__students)
 
     def __add_to_students_table_widget(self, students):
         def un_editable_item_widget(item_widget):
@@ -143,6 +144,7 @@ class MainWindowController(QWidget):
             item.setFlags(item.flags() ^ Qt.ItemIsEditable)
             return item
 
+        self.ui.students_table_widget.clearContents()
         self.ui.students_table_widget.setRowCount(len(students))
         for i, student in enumerate(students):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
