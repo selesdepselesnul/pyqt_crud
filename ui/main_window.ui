@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Form Mahasiswa</string>
   </property>
   <widget class="QTabWidget" name="student_tab">
    <property name="geometry">

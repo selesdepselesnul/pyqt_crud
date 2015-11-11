@@ -147,7 +147,8 @@ class MainWindowController(QWidget):
         for i in range(len(students)):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
                                                           uneditable_item_widget(
-                                                              students[i].student_id
+                                                            students[i].
+                                                            student_id
                                                           )))
             self.ui.students_table_widget.setItem(i, 1, QTableWidgetItem(
                                                           students[i].name))
