@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# author : Moch Deden (https://github.com/selesdepselesnul)
 from PyQt5.QtWidgets import QApplication
 
 from controller.MainWindowController import MainWindowController

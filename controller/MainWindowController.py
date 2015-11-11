@@ -1,3 +1,4 @@
+# author : Moch Deden (https://github.com/selesdepselesnul)
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 from PyQt5 import uic
 from model.Student import Student

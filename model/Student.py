@@ -1,3 +1,4 @@
+# author : Moch Deden (https://github.com/selesdepselesnul)
 class Student(object):
 
     ACTIVE = 'Aktif'
