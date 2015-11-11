@@ -84,7 +84,8 @@ class MainWindowController(QWidget):
 
     def __change_data_by_id(self, item, new_value, action):
         student_id = self.ui.students_table_widget.item(
-                    item.row(), 0).text()
+                    item.row(), MainWindowController.__TABLE_COLUMNS['ID'])\
+                                                    .text()
         for i, student in enumerate(self.__students):
             if str(student.student_id) == student_id:
                 action(i, new_value)
@@ -93,11 +94,11 @@ class MainWindowController(QWidget):
         def change_value(action):
             self.__change_data_by_id(prev, prev.text(), action)
         if prev is not None:
-            if prev.column() == 2:
+            if prev.column() == MainWindowController.__TABLE_COLUMNS['ADDRESS']:
                 def address_at(i, new_value):
                     self.__students[i].address = new_value
                 change_value(address_at)
-            elif prev.column() == 1:
+            elif prev.column() == MainWindowController.__TABLE_COLUMNS['NAME']:
                 def name_at(i, new_value):
                     self.__students[i].name = new_value
                 change_value(name_at)
@@ -112,7 +113,7 @@ class MainWindowController(QWidget):
         def change_status(new_value):
             self.__change_data_by_id(item, new_value, status_at)
 
-        if item.column() == 3:
+        if item.column() == MainWindowController.__TABLE_COLUMNS['STATUS']:
 
             if item.text() == Student.ACTIVE:
                 change_status(Student.DEACTIVE)
