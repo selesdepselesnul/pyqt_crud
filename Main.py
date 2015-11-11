@@ -8,4 +8,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     main_window_controller = MainWindowController()
     main_window_controller.show()
+    main_window_controller.setFixedWidth(565)
+    main_window_controller.setFixedHeight(271)
     sys.exit(app.exec_())

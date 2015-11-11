@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pengisian">
     <attribute name="title">
@@ -96,9 +96,9 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>20</x>
        <y>20</y>
-       <width>491</width>
+       <width>521</width>
        <height>161</height>
       </rect>
      </property>
@@ -126,7 +126,7 @@
     <widget class="QLineEdit" name="filtering_by_id_line_edit">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>20</x>
        <y>190</y>
        <width>131</width>
        <height>26</height>
@@ -141,7 +141,7 @@
       <rect>
        <x>360</x>
        <y>190</y>
-       <width>161</width>
+       <width>181</width>
        <height>26</height>
       </rect>
      </property>
