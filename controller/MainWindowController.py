@@ -55,18 +55,21 @@ class MainWindowController(QWidget):
         self.update_students_table_widget()
 
     def on_packing_student_button_clicked(self):
-        selected_file = QFileDialog.getSaveFileName(
-            self.ui, "Save lll File", MainWindowController.DEFAULT_FILE + "-bak"
-               + MainWindowController.FILE_EXT, MainWindowController
-                .FILE_FILTERING_FORMAT)[0]
-        pickle.dump(self.__students, open(selected_file, 'wb'))
+        tuple_of_selected_file = QFileDialog.getSaveFileName(
+            self.ui, "Save lll File", MainWindowController.DEFAULT_FILE +
+            "-bak" + MainWindowController.FILE_EXT, MainWindowController
+            .FILE_FILTERING_FORMAT)
+
+        if tuple_of_selected_file != ('', ''):
+            pickle.dump(self.__students, open(tuple_of_selected_file[0], 'wb'))
 
     def on_loading_student_button_clicked(self):
-        selected_file = QFileDialog.getOpenFileName(
+        tuple_of_selected_file = QFileDialog.getOpenFileName(
             self.ui, "Load lll file", 'Sesuatu' + MainWindowController.FILE_EXT,
-            MainWindowController.FILE_FILTERING_FORMAT)[0]
-        students = list(pickle.load(open(selected_file, 'rb')))
-        self.__add_to_students_table_widget(students)
+            MainWindowController.FILE_FILTERING_FORMAT)
+        if tuple_of_selected_file != ('', ''):
+            students = list(pickle.load(open(tuple_of_selected_file[0], 'rb')))
+            self.__add_to_students_table_widget(students)
 
     def on_typing_filtering_id(self):
         filtered_id = str(self.ui.filtering_by_id_line_edit.text())
