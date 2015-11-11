@@ -17,6 +17,7 @@ class MainWindowController(QWidget):
     __DEFAULT_FILE = 'Students'
     __FILE_EXT = '.lll'
     __STUDENTS_DATA_FILE = __DEFAULT_FILE + __FILE_EXT
+    __TABLE_COLUMNS = {'ID': 0, 'NAME': 1, 'ADDRESS': 2, 'STATUS': 3}
 
     def __init__(self):
         super().__init__()
@@ -147,20 +148,28 @@ class MainWindowController(QWidget):
         self.ui.students_table_widget.clearContents()
         self.ui.students_table_widget.setRowCount(len(students))
         for i, student in enumerate(students):
-            self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
-                                                        un_editable_item_widget(
-                                                            student.student_id
-                                                        )))
-            self.ui.students_table_widget.setItem(i, 1, QTableWidgetItem(
+            self.ui.students_table_widget.setItem(i,
+                                                  MainWindowController.
+                                                  __TABLE_COLUMNS['ID'],
+                                                  QTableWidgetItem(
+                                                      un_editable_item_widget(
+                                                          student.student_id)))
+            self.ui.students_table_widget.setItem(i, MainWindowController.
+                                                  __TABLE_COLUMNS['NAME'],
+                                                  QTableWidgetItem(
                                                           student.name))
-            self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
+            self.ui.students_table_widget.setItem(i, MainWindowController.
+                                                  __TABLE_COLUMNS['ADDRESS'],
+                                                  QTableWidgetItem(
                                                           student.address))
             status_item = un_editable_item_widget(student.status)
             if student.status == Student.ACTIVE:
                 status_item.setBackground(QColor('green'))
             else:
                 status_item.setBackground(QColor('red'))
-            self.ui.students_table_widget.setItem(i, 3, status_item)
+            self.ui.students_table_widget.setItem(i, MainWindowController.
+                                                  __TABLE_COLUMNS['STATUS'],
+                                                  status_item)
 
     def __update_students_table_widget(self):
         if Path(MainWindowController.__STUDENTS_DATA_FILE).exists():
