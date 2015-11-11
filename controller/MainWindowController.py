@@ -81,8 +81,8 @@ class MainWindowController(QWidget):
     def change_data_by_id(self, item, new_value, action):
         student_id = self.ui.students_table_widget.item(
                     item.row(), 0).text()
-        for i in range(len(self.__students)):
-            if str(self.__students[i].student_id) == student_id:
+        for i, student in enumerate(self.__students):
+            if str(student.student_id) == student_id:
                 action(i, new_value)
 
     def on_student_end_editing(self, _, prev):
