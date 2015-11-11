@@ -144,18 +144,17 @@ class MainWindowController(QWidget):
             return item
 
         self.ui.students_table_widget.setRowCount(len(students))
-        for i in range(len(students)):
+        for i, student in enumerate(students):
             self.ui.students_table_widget.setItem(i, 0, QTableWidgetItem(
                                                           uneditable_item_widget(
-                                                            students[i].
-                                                            student_id
+                                                            student.student_id
                                                           )))
             self.ui.students_table_widget.setItem(i, 1, QTableWidgetItem(
-                                                          students[i].name))
+                                                          student.name))
             self.ui.students_table_widget.setItem(i, 2, QTableWidgetItem(
-                                                          students[i].address))
-            status_item = uneditable_item_widget(students[i].status)
-            if students[i].status == Student.ACTIVE:
+                                                          student.address))
+            status_item = uneditable_item_widget(student.status)
+            if student.status == Student.ACTIVE:
                 status_item.setBackground(QColor('green'))
             else:
                 status_item.setBackground(QColor('red'))
@@ -176,11 +175,10 @@ class MainWindowController(QWidget):
 
         if not student_database.exists():
             pickle.dump([student], open(self.__STUDENTS_DATA_FILE, 'wb'))
-            print("Doesn't Exist")
         else:
             student_list = list(pickle.load(open(self.__STUDENTS_DATA_FILE,
                                                  'rb')))
             student_list.append(student)
             pickle.dump(student_list, open(self.__STUDENTS_DATA_FILE, 'wb'))
             self.update_students_table_widget()
-            print("Exist")
+
