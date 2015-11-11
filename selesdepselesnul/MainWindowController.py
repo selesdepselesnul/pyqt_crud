@@ -1,13 +1,15 @@
 # author : Moch Deden (https://github.com/selesdepselesnul)
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem
-from PyQt5 import uic
-from model.Student import Student
-from pathlib import Path
-from PyQt5.QtGui import QColor
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QFileDialog
-import re
 import pickle
+import re
+from pathlib import Path
+
+from PyQt5 import uic
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QWidget, QTableWidgetItem
+
+from selesdepselesnul.Student import Student
 
 
 class MainWindowController(QWidget):
@@ -21,7 +23,7 @@ class MainWindowController(QWidget):
         self.__STUDENTS_DATA_FILE = MainWindowController.DEFAULT_FILE \
                                     + MainWindowController.FILE_EXT
         self.__students = []
-        self.ui = uic.loadUi('ui/main_window.ui', self)
+        self.ui = uic.loadUi('selesdepselesnul/main_window.ui', self)
         self.ui.student_tab.setTabText(0, 'Input Mahasiswa')
         self.ui.student_tab.setTabText(1, 'Manage Mahasiswa')
 
