@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QFileDialog
 import re
 import pickle
 
+
 class MainWindowController(QWidget):
     FILE_FILTERING_FORMAT = "lll File (*lll)"
     DEFAULT_FILE = 'Students'
@@ -24,7 +25,7 @@ class MainWindowController(QWidget):
         self.ui.student_tab.setTabText(1, 'Manage Mahasiswa')
 
         self.ui.submiting_button.clicked.connect(
-            self.on_submiting_data)
+            self.on_submitted_data)
         self.students_updated = []
         self.ui.students_filtering_combo_box.activated[str].connect(
             self.on_filtering_students
@@ -62,7 +63,7 @@ class MainWindowController(QWidget):
     def on_loading_student_button_clicked(self):
         selected_file = QFileDialog.getOpenFileName(
             self.ui, "Load lll file", 'Sesuatu' + MainWindowController.FILE_EXT,
-                MainWindowController.FILE_FILTERING_FORMAT)[0]
+            MainWindowController.FILE_FILTERING_FORMAT)[0]
         students = list(pickle.load(open(selected_file, 'rb')))
         self.__add_to_students_table_widget(students)
 
@@ -97,8 +98,9 @@ class MainWindowController(QWidget):
 
     def on_student_data_clicked(self, item):
         print('Double click')
+
         def change_status_at(i, new_value):
-             self.__students[i].status = new_value
+            self.__students[i].status = new_value
 
         def change_status(new_value):
             self.change_data_by_id(item, new_value, change_status_at)
@@ -160,7 +162,7 @@ class MainWindowController(QWidget):
                 pickle.load(open(self.__STUDENTS_DATA_FILE, 'rb')))
             self.__add_to_students_table_widget(self.__students)
 
-    def on_submiting_data(self):
+    def on_submitted_data(self):
         student = Student(self.ui.id_line_edit.text(),
                           self.ui.name_line_edit.text(),
                           self.ui.address__line_edit.text())
